@@ -131,7 +131,9 @@ def download_and_extract(uri, path):  # type: (str, str) -> None
     """
     if not os.path.exists(path):
         os.makedirs(path)
-    if not os.listdir(path):
+    if os.listdir(path):
+        print(f"not copying files over {path}")
+    else:
         with tmpdir() as tmp:
             if uri.startswith("s3://"):
                 dst = os.path.join(tmp, "tar_file")
